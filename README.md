@@ -4,7 +4,7 @@
 - npm i
 - 若是iOS，直接：react-native run-ios 
 - 若是 Android,需要先 react-native run-android 下载gradle, 再打开 Android studio，用 Android studio 跑项目
-
+- 加入Git(git init; git commit -m "first commit"; git remote add origin https://github.com/fengyinchao/RNCNode.git; git push -u origin master)
 
 ## 遇到的问题
 - 用 Android studio 跑项目时，有个 error： Please select android sdk
