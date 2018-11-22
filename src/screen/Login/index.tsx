@@ -35,7 +35,7 @@ type test = typeof a | typeof b | typeof c;
 
 class List extends Component<Props,State> {
 
-  readonly state: State = initialState
+  private readonly state: State = initialState
 
   _onChangeTextAccount = account => {
     this.setState({
