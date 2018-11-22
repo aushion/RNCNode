@@ -10,7 +10,7 @@ import {
   // @ts-ignore
 } from 'react-native-elements';
 
-const initialState = { 
+const initialState = {
   account: '',
   accountError: null,
   password: '',
