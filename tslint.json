@@ -1,5 +1,5 @@
 {
-    "extends": ["tslint:latest", "tslint-config-prettier"],
+    "extends": ["tslint-config-alloy", "tslint-config-prettier"],
     "linterOptions": {
         "exclude": [
             "config/**/*.js",
