@@ -158,6 +158,7 @@ const styles = {
 
 export default Home;
 
+// @ts-ignore
 export const CommonOptions = ({ navigation }) => {
   return {
     title: navigation.getParam('title', '基本组件'),
