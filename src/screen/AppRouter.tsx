@@ -1,24 +1,24 @@
-import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
-import React from 'react';
-import SplashScreen from 'react-native-splash-screen';
-import { ActivityIndicator, StatusBar, View } from 'react-native';
+import { createStackNavigator, createSwitchNavigator } from 'react-navigation'
+import React from 'react'
+import SplashScreen from 'react-native-splash-screen'
+import { ActivityIndicator, StatusBar, View } from 'react-native'
 
-import Sign from './Login';
-import Preference from 'react-native-default-preference';
+import Sign from './Login'
+import Preference from 'react-native-default-preference'
 
 class LoadingScreen extends React.Component<NavigationProps> {
   constructor(props: any) {
-    super(props);
-    this._bootstrapAsync();
+    super(props)
+    this._bootstrapAsync()
   }
 
   componentDidMount = () => {
-    SplashScreen.hide();
-  };
+    SplashScreen.hide()
+  }
 
   async _bootstrapAsync() {
-    const value = await Preference.get('account');
-    this.props.navigation.navigate(value ? 'App' : 'Login');
+    const value = await Preference.get('account')
+    this.props.navigation.navigate(value ? 'App' : 'Login')
   }
 
   render() {
@@ -27,7 +27,7 @@ class LoadingScreen extends React.Component<NavigationProps> {
         <ActivityIndicator />
         <StatusBar barStyle="default" />
       </View>
-    );
+    )
   }
 }
 
@@ -41,21 +41,19 @@ const App = createStackNavigator(
     initialRouteName: '/tab-navigation',
     headerMode: 'none'
   }
-);
+)
 
 const LoginStack = createStackNavigator({
   SignIn: Sign
-});
+})
 
 export default createSwitchNavigator(
   {
-    Loading: {
-      screen: LoadingScreen
-    },
+    Loading: LoadingScreen,
     App,
     Login: LoginStack
   },
   {
     initialRouteName: 'Loading'
   }
-);
+)
