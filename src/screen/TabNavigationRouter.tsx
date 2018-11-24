@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // npm i 后需要 react-naitve link react-native-vector-icons一下
 import React from 'react';
 
+const IoniconsFontSize: number = 25;
 export default createBottomTabNavigator(
   {
     '/rnComponent': {
@@ -10,9 +11,7 @@ export default createBottomTabNavigator(
   },
   {
     initialRouteName: '/rnComponent',
-    headerMode: 'none',
     navigationOptions: ({ navigation }) => ({
-      /* eslint-disable */
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
@@ -25,7 +24,10 @@ export default createBottomTabNavigator(
         } else {
           iconName = `logo-apple`;
         }
-        return <Ionicons name={iconName} size={25} color={tintColor} />;
+
+        return (
+          <Ionicons name={iconName} size={IoniconsFontSize} color={tintColor} />
+        );
       }
     }),
     tabBarOptions: {

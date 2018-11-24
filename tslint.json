@@ -4,7 +4,8 @@
     "ordered-imports": false, // 导入模块不用按字典序
     "member-access": false, // 允许不写 public protected private
     "no-object-literal-type-assertion": false, // 允许对对象字面量使用类型断言
-    "comment-format": false // 评论 不要格式
+    "comment-format": false, // 评论 不要格式
+    "no-any": false
   },
   "linterOptions": {
     "exclude": [

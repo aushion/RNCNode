@@ -1,7 +1,7 @@
 import {
   AppRegistry
 } from 'react-native'
-import App from './src/screen/Login';
+import App from './src/screen/AppRouter';
 import {
   name as appName
 } from './app.json';

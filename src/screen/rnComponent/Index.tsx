@@ -6,6 +6,8 @@ import Preference from 'react-native-default-preference';
 // const resetAction = NavigationActions.goBack();
 // 页面级组件会被 react-navigation 注入 navigation,screenProps,navigationOptions 三个属性
 // 同一页面的 navigation.state.params 是同步一致的，可以用来和页面内其他组件通讯
+const IoniconsFontSize: number = 25;
+
 class Home extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -15,7 +17,7 @@ class Home extends React.Component {
           name={'ios-power'}
           style={{ marginRight: 10 }}
           color={'white'}
-          size={25}
+          size={IoniconsFontSize}
           onPress={() => Home._onPress(navigation)}
         />
       ),
@@ -40,7 +42,7 @@ class Home extends React.Component {
           text: 'Confirm',
           onPress: async () => {
             await Preference.clearMultiple(['account', 'password']);
-            navigation.navigate('AuthLoading');
+            navigation.navigate('Loading');
           }
         }
       ],
@@ -48,7 +50,7 @@ class Home extends React.Component {
     );
   };
 
-  _navigate(path, params = {}) {
+  _navigate() {
     this.props.navigation.navigate(path, params);
   }
 
@@ -164,7 +166,7 @@ export const CommonOptions = ({ navigation }) => {
         name={'ios-arrow-back'}
         style={{ marginLeft: 10 }}
         color={'white'}
-        size={25}
+        size={IoniconsFontSize}
         onPress={() => navigation.goBack(null)}
       />
     ),

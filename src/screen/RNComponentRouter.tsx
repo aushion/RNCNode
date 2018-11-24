@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 const RNComponentNavigator = createStackNavigator(
   {
     '/rnComponent/index': {
-      screen: require('../screens/rnComponent/Index').default
+      screen: require('./rnComponent/Index').default
     }
   },
   {
@@ -21,16 +21,13 @@ const RNComponentNavigator = createStackNavigator(
   }
 );
 
-export default class RNNavigator extends Component {
+export default class RNNavigator extends Component<NavigationProps> {
   static router = RNComponentNavigator.router;
   static navigationOptions = {
     tabBarLabel: '基本组件'
   };
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
   render() {
+    // @ts-ignore
     return <RNComponentNavigator navigation={this.props.navigation} />;
   }
 }

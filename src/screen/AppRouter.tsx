@@ -1,14 +1,35 @@
-import { createStackNavigator, SwitchNavigator } from 'react-navigation';
+import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import React from 'react';
-import SplashScreen from 'react-native-splash-screen'
-import {
-  ActivityIndicator,
-  StatusBar,
-  View
-} from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
+import { ActivityIndicator, StatusBar, View } from 'react-native';
 
 import Sign from './Login';
 import Preference from 'react-native-default-preference';
+
+class LoadingScreen extends React.Component<NavigationProps> {
+  constructor(props: any) {
+    super(props);
+    this._bootstrapAsync();
+  }
+
+  componentDidMount = () => {
+    SplashScreen.hide();
+  };
+
+  async _bootstrapAsync() {
+    const value = await Preference.get('account');
+    this.props.navigation.navigate(value ? 'App' : 'Login');
+  }
+
+  render() {
+    return (
+      <View>
+        <ActivityIndicator />
+        <StatusBar barStyle="default" />
+      </View>
+    );
+  }
+}
 
 const App = createStackNavigator(
   {
@@ -22,50 +43,19 @@ const App = createStackNavigator(
   }
 );
 
-class AuthLoadingScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this._bootstrapAsync();
-  }
+const LoginStack = createStackNavigator({
+  SignIn: Sign
+});
 
-  componentDidMount = () => {
-    SplashScreen.hide();
-  };
-
-  // Fetch the token from storage then navigate to our appropriate place
-  async _bootstrapAsync() {
-    const value = await Preference.get('account');
-    this.props.navigation.navigate(value ? 'App' : 'Auth');
-  }
-
-  // Render any loading content that you like here
-  render() {
-    return (
-      <View>
-        <ActivityIndicator />
-        <StatusBar barStyle="default" />
-      </View>
-    );
-  }
-}
-
-const AuthStack = createStackNavigator(
+export default createSwitchNavigator(
   {
-    SignIn: Sign
+    Loading: {
+      screen: LoadingScreen
+    },
+    App,
+    Login: LoginStack
   },
   {
-    headerMode: 'none'
+    initialRouteName: 'Loading'
   }
 );
-
-export default SwitchNavigator(
-  {
-    AuthLoading: AuthLoadingScreen,
-    App: App,
-    Auth: AuthStack
-  },
-  {
-    initialRouteName: 'AuthLoading'
-  }
-);
-
