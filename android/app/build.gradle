@@ -138,7 +138,6 @@ android {
 
 dependencies {
     compile project(':react-native-vector-icons')
-    compile project(':react-native-gesture-handler')
     compile project(':react-native-default-preference')
     compile project(':react-native-splash-screen')
     implementation fileTree(dir: "libs", include: ["*.jar"])

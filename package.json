@@ -28,6 +28,7 @@
     "@types/react-navigation": "2.13.4",
     "husky": "1.2.0",
     "lint-staged": "8.1.0",
+    "metro-react-native-babel-preset": "0.49.2",
     "react-native-typescript-transformer": "^1.2.10",
     "tslint": "^5.11.0",
     "tslint-config-alloy": "0.2.0",
