@@ -5,11 +5,11 @@ import React from 'react';
 const IoniconsFontSize: number = 25;
 export default createBottomTabNavigator(
   {
-    '/elite': {
-      screen: require('./Elite/router').default
-    },
     '/main': {
       screen: require('./Main/router').default
+    },
+    '/elite': {
+      screen: require('./Elite/router').default,
     },
     '/share': {
       screen: require('./Share/router').default
@@ -22,7 +22,7 @@ export default createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: '/elite',
+    initialRouteName: '/main',
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;

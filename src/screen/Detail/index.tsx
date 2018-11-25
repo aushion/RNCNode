@@ -10,7 +10,16 @@ const IoniconsFontSize: number = 25
 class Home extends React.Component<NavigationProps> {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: '精华',
+      title: navigation.getParam('otherParam', '基本组件'),
+      headerRight: (
+        <Ionicons
+          name={'ios-power'}
+          style={{ marginRight: 10 }}
+          color={'white'}
+          size={IoniconsFontSize}
+          onPress={() => Home._onPress(navigation)}
+        />
+      ),
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold'
@@ -49,7 +58,7 @@ class Home extends React.Component<NavigationProps> {
       <View style={styles.body}>
         <Button
           title={'Text'}
-          onPress={this._navigate.bind(this, '/setting', {
+          onPress={this._navigate.bind(this, '/rnComponent/text', {
             title: 'Text'
           })}
         />
@@ -61,7 +70,7 @@ class Home extends React.Component<NavigationProps> {
 const styles = {
   body: {
     flex: 1,
-    backgroundColor:'green'
+    marginTop: 50
   },
   text: {
     flex: 1,
