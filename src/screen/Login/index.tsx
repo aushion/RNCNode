@@ -8,7 +8,6 @@ import {
   FormValidationMessage,
   Button
 } from 'react-native-elements'
-import SplashScreen from 'react-native-splash-screen'
 
 enum Behavior {
   Padding = 'padding',
@@ -44,10 +43,6 @@ class List extends Component<NavigationProps, State> {
     })
   }
 
-  componentDidMount = () => {
-    SplashScreen.hide()
-  }
-
   _login = async () => {
     const { account, password } = this.state
     if (!account) {
@@ -68,7 +63,7 @@ class List extends Component<NavigationProps, State> {
       account,
       password
     })
-    this.props.navigation.navigate('/tab-navigation')
+    this.props.navigation.navigate('/app')
   }
   render() {
     return (

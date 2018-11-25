@@ -1,12 +1,12 @@
-import React from 'react';
-import { View, Button, Alert } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons'; // npm i 后需要 react-naitve link react-native-vector-icons一下
-import Preference from 'react-native-default-preference';
+import React from 'react'
+import { View, Button, Alert } from 'react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons' // npm i 后需要 react-naitve link react-native-vector-icons一下
+import Preference from 'react-native-default-preference'
 
 // const resetAction = NavigationActions.goBack();
 // 页面级组件会被 react-navigation 注入 navigation,screenProps,navigationOptions 三个属性
 // 同一页面的 navigation.state.params 是同步一致的，可以用来和页面内其他组件通讯
-const IoniconsFontSize: number = 25;
+const IoniconsFontSize: number = 25
 
 class Home extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -25,8 +25,8 @@ class Home extends React.Component {
       headerTitleStyle: {
         fontWeight: 'bold'
       }
-    };
-  };
+    }
+  }
 
   static _onPress = navigation => {
     Alert.alert(
@@ -41,17 +41,17 @@ class Home extends React.Component {
         {
           text: 'Confirm',
           onPress: async () => {
-            await Preference.clearMultiple(['account', 'password']);
-            navigation.navigate('Loading');
+            await Preference.clearMultiple(['account', 'password'])
+            navigation.navigate('Launch')
           }
         }
       ],
       { cancelable: true }
-    );
-  };
+    )
+  }
 
   _navigate() {
-    this.props.navigation.navigate(path, params);
+    this.props.navigation.navigate(path, params)
   }
 
   render() {
@@ -140,7 +140,7 @@ class Home extends React.Component {
           })}
         />
       </View>
-    );
+    )
   }
 }
 
@@ -154,9 +154,9 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center'
   }
-};
+}
 
-export default Home;
+export default Home
 
 // @ts-ignore
 export const CommonOptions = ({ navigation }) => {
@@ -175,5 +175,5 @@ export const CommonOptions = ({ navigation }) => {
     headerTitleStyle: {
       fontWeight: 'bold'
     }
-  };
-};
+  }
+}

@@ -5,24 +5,38 @@ import React from 'react';
 const IoniconsFontSize: number = 25;
 export default createBottomTabNavigator(
   {
-    '/rnComponent': {
-      screen: require('./RNComponentRouter').default
+    '/elite': {
+      screen: require('./Elite/router').default
+    },
+    '/main': {
+      screen: require('./Main/router').default
+    },
+    '/share': {
+      screen: require('./Share/router').default
+    },
+    '/recruit': {
+      screen: require('./Recruit/router').default
+    },
+    '/question': {
+      screen: require('./Question/router').default
     }
   },
   {
-    initialRouteName: '/rnComponent',
+    initialRouteName: '/elite',
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === '/rnComponent') {
+        if (routeName === '/elite') {
           iconName = `logo-html5`;
-        } else if (routeName === '/rnApi') {
+        } else if (routeName === '/main') {
           iconName = `logo-css3`;
-        } else if (routeName === '/thirdComponent') {
+        } else if (routeName === '/share') {
           iconName = 'logo-javascript';
-        } else {
+        } else if(routeName === '/recruit'){
           iconName = `logo-apple`;
+        } else{
+          iconName = 'logo-apple'
         }
 
         return (
