@@ -1,9 +1,8 @@
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation'
 import React from 'react'
 import SplashScreen from 'react-native-splash-screen'
-
+import Ionicons from 'react-native-vector-icons/Ionicons' // npm i 后需要 react-naitve link react-native-vector-icons一下
 import Login from './Login'
-import Home from './Home/router'
 import Preference from 'react-native-default-preference'
 
 class Launch extends React.Component<NavigationProps> {
@@ -23,17 +22,35 @@ class Launch extends React.Component<NavigationProps> {
   }
 }
 
-// const Home = createStackNavigator(
-//   {
-//     '/home': {
-//       screen: require('./Home/router').default
-//     }
-//   },
-//   {
-//     initialRouteName: '/home',
-//     headerMode: 'none'
-//   }
-// )
+const Home = createStackNavigator(
+  {
+    '/home': {
+      screen: require('./Home/router').default,
+      path: '/home',
+      navigationOptions: {
+        title: 'CNode 社区',
+        headerRight: null,
+        headerStyle:{
+          backgroundColor:'green',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold'
+        }
+      },
+    },
+    '/setting':{
+      screen: require('./Setting').default
+    },
+    '/detail':{
+      screen: require('./Detail').default
+    }
+  },
+  {
+    initialRouteName: '/home',
+    headerMode: 'screen',
+  }
+)
 
 export default createSwitchNavigator(
   {

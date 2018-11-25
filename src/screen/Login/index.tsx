@@ -63,7 +63,7 @@ class List extends Component<NavigationProps, State> {
       account,
       password
     })
-    this.props.navigation.navigate('/app')
+    this.props.navigation.navigate('/home')
   }
   render() {
     return (

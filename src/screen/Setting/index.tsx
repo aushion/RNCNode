@@ -7,14 +7,24 @@ import Preference from 'react-native-default-preference'
 // 同一页面的 navigation.state.params 是同步一致的，可以用来和页面内其他组件通讯
 const IoniconsFontSize: number = 25
 
-class Home extends React.Component<NavigationProps> {
+class Setting extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: '精华',
+      title: navigation.getParam('otherParam', '基本组件'),
+      headerRight: (
+        <Ionicons
+          name={'ios-power'}
+          style={{ marginRight: 10 }}
+          color={'white'}
+          size={IoniconsFontSize}
+          onPress={() => Setting._onPress(navigation)}
+        />
+      ),
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold'
-      }
+      },
+      // headerMode: 'none'
     }
   }
 
@@ -40,7 +50,7 @@ class Home extends React.Component<NavigationProps> {
     )
   }
 
-  _navigate(path,params) {
+  _navigate() {
     this.props.navigation.navigate(path, params)
   }
 
@@ -48,8 +58,8 @@ class Home extends React.Component<NavigationProps> {
     return (
       <View style={styles.body}>
         <Button
-          title={'Text'}
-          onPress={this._navigate.bind(this, '/setting', {
+          title={'Text setting'}
+          onPress={this._navigate.bind(this, '/rnComponent/text', {
             title: 'Text'
           })}
         />
@@ -61,7 +71,7 @@ class Home extends React.Component<NavigationProps> {
 const styles = {
   body: {
     flex: 1,
-    backgroundColor:'green'
+    marginTop: 50
   },
   text: {
     flex: 1,
@@ -70,24 +80,4 @@ const styles = {
   }
 }
 
-export default Home
-
-// @ts-ignore
-export const CommonOptions = ({ navigation }) => {
-  return {
-    title: navigation.getParam('title', '基本组件'),
-    headerLeft: (
-      <Ionicons
-        name={'ios-arrow-back'}
-        style={{ marginLeft: 10 }}
-        color={'white'}
-        size={IoniconsFontSize}
-        onPress={() => navigation.goBack(null)}
-      />
-    ),
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold'
-    }
-  }
-}
+export default Setting
