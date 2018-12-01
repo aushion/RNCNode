@@ -22,7 +22,7 @@ export default createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: '/main',
+    initialRouteName: '/elite',
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state

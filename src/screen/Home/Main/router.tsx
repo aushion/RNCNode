@@ -1,7 +1,9 @@
 import React from 'react'
 // @ts-ignore
 import { ListContainer } from '../../../component/List/ListContainer'
-import { getTopicByName } from '../../../service'
+import { getTopicByTabName } from '../../../service'
+import { View } from 'react-native'
+
 class MainScreen extends React.Component<NavigationProps> {
   static navigationOptions = {
     title: '主页',
@@ -13,26 +15,46 @@ class MainScreen extends React.Component<NavigationProps> {
 
   state = {
     data: [],
-    refresh: true
+    refreshing: true
   }
 
-  componentDidMount = async () => {
-    const result = await getTopicByName('topics')
+  onRefresh = async () => {
+    const result = await getTopicByTabName()
     if (result) {
       this.setState({
         data: result.data,
-        refresh: false
+        refreshing: false
       })
     } else {
       this.setState({
-        refresh: false
+        refreshing: false
       })
     }
   }
 
+  onEndReached = () => {
+    return this.onRefresh()
+  }
+
+  onItemPressed = () => {
+    return this.props.navigation.navigate('/detail')
+  }
+
+  componentDidMount = () => {
+    this.onRefresh()
+  }
+
   render() {
     return (
-      <ListContainer source={this.state.data} refresh={this.state.refresh} />
+      <View style={{ flex: 1 }}>
+        <ListContainer
+          source={this.state.data}
+          refreshing={this.state.refreshing}
+          onRefresh={this.onRefresh}
+          onEndReached={this.onEndReached}
+          onItemPressed={this.onItemPressed}
+        />
+      </View>
     )
   }
 }

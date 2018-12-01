@@ -19,3 +19,5 @@
 点进去重写下载一波依赖就 OK
 - 引入ts 时，import React from 'react'; 报错
 增加配置："allowSyntheticDefaultImports":true
+- react-navigation 使用注意：
+[显式渲染多个 navigator](https://reactnavigation.org/docs/zh-Hans/common-mistakes.html)

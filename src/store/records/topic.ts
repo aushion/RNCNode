@@ -10,7 +10,7 @@ export const Topic = Record({
   authorId: '',
   author: {
     loginName: '',
-    avatra: ''
+    avatar: ''
   },
   lastRepliedAt: '', // 最后一次回复时间
   replyCount: '', // 回复总数

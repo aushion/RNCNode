@@ -1,8 +1,8 @@
 // @ts-ignore
 import { get } from '../utils/request'
 
-function getTopicByName(name: string) {
-  return get(name, { timeout: 10000 })
+function getTopicByTabName(name?: string) {
+  return get(`topics${name ? `?tab=${name}` : ``}`, { timeout: 10000 })
 }
 
-export { getTopicByName }
+export { getTopicByTabName }
