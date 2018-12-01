@@ -5,7 +5,11 @@
 import Config from './config';
 
 function request(method, url, options = {}) {
-  const { body, fetchConfig, timeout } = options;
+  const {
+    body,
+    fetchConfig,
+    timeout
+  } = options;
   const requestUrl = `${Config.Host}${url}`;
   const requestBody = Object.assign({
     method,
@@ -14,7 +18,9 @@ function request(method, url, options = {}) {
   });
   let promise = fetch(requestUrl, requestBody, fetchConfig)
     .then(response => {
-      const { status } = response;
+      const {
+        status
+      } = response;
       if (status >= 200 && status < 300) {
         if (status === 204) {
           return null;
@@ -42,7 +48,9 @@ function request(method, url, options = {}) {
       })
     ]);
   }
-  return promise.catch(e=>{console.log('e',e)});
+  return promise.catch(e => {
+    console.log('e', e)
+  });
 }
 
 function post(url, options = {}) {
@@ -53,6 +61,9 @@ function get(url, options = {}) {
   return request('get', url, options);
 }
 
-export { get, post };
+export {
+  get,
+  post
+};
 
 export default request;

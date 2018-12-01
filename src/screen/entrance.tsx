@@ -1,9 +1,12 @@
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation'
-import React from 'react'
+import React,{Component} from 'react'
 import SplashScreen from 'react-native-splash-screen'
 import Ionicons from 'react-native-vector-icons/Ionicons' // npm i 后需要 react-naitve link react-native-vector-icons一下
 import Login from './Login'
 import Preference from 'react-native-default-preference'
+import {View} from 'react-native'
+import { Provider } from 'react-redux';
+import getStore from '../store/getStore';
 
 class Launch extends React.Component<NavigationProps> {
   constructor(props: any) {
@@ -52,7 +55,8 @@ const Home = createStackNavigator(
   }
 )
 
-export default createSwitchNavigator(
+
+const EntranceNavigator = createSwitchNavigator(
   {
     Launch,
     Home,
@@ -62,3 +66,16 @@ export default createSwitchNavigator(
     initialRouteName: 'Launch'
   }
 )
+
+export default class EntranceNavigatorWithStore extends Component{
+  private store = getStore()
+  render(){
+    return (
+      <View>
+        {/* <Provider store={this.store}> */}
+          <EntranceNavigator />
+        {/* </Provider> */}
+      </View>
+    )
+  }
+}

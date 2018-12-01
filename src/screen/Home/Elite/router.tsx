@@ -40,7 +40,7 @@ class Home extends React.Component<NavigationProps> {
     )
   }
 
-  _navigate(path,params) {
+  _navigate(path, params) {
     this.props.navigation.navigate(path, params)
   }
 
@@ -61,7 +61,7 @@ class Home extends React.Component<NavigationProps> {
 const styles = {
   body: {
     flex: 1,
-    backgroundColor:'green'
+    backgroundColor: 'green'
   },
   text: {
     flex: 1,

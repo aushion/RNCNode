@@ -2,6 +2,6 @@
  *  @providesModule constants/Config
  */
 
- module.exports = {
-   Host:'https://cnodejs.org/api/v1/'
- }
+module.exports = {
+  Host: 'https://cnodejs.org/api/v1/'
+}

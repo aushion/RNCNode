@@ -1,10 +1,8 @@
 // @ts-ignore
-import {get} from '../utils/request'
+import { get } from '../utils/request'
 
-function getTopicByName(name:string) {
-  return get(name,{timeout:1000});
+function getTopicByName(name: string) {
+  return get(name, { timeout: 100 })
 }
 
-export {
-  getTopicByName
-}
+export { getTopicByName }
