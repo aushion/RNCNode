@@ -1,3 +1,3 @@
 import TopicContainerHOC from './TopicContainerHoc'
 
-export default TopicContainerHOC({ tab: '', title: '主页' })
+export default TopicContainerHOC({ tab: 'all', title: '主页' })

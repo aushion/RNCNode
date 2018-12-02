@@ -3,6 +3,7 @@
  */
 
 import Config from './config';
+import queryString from 'query-string';
 
 function request(method, url, options = {}) {
   const {
@@ -26,6 +27,8 @@ function request(method, url, options = {}) {
           return null;
         }
         return response.json().then(result => {
+          const tab = queryString.parseUrl(requestUrl).query.tab
+          result.tab = tab
           return result;
         });
       }

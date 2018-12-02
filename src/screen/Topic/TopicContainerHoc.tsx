@@ -7,10 +7,10 @@ import { CommonHeader } from '../../component/Navigation/Header'
 import { CustomAvatar } from '../../component/Navigation/Button'
 import { is } from 'immutable'
 
-export default function({ tab = '', title = '精华' }) {
+export default function({ tab = 'all', title = '精华' }) {
   const mapStateToProps = (state, ownProps) => {
     return {
-      $list: state.topic
+      $list: state.topic.get(tab)
     }
   }
 
@@ -80,7 +80,7 @@ export default function({ tab = '', title = '精华' }) {
       const thisProps = this.props || {},
         thisState = this.state || {}
 
-      if (!nextProps.$list.size) {
+      if (nextProps.$list && !nextProps.$list.size) {
         return false
       }
 
@@ -110,7 +110,7 @@ export default function({ tab = '', title = '精华' }) {
     }
 
     render() {
-      const source = this.props.$list.toJS()
+      const source = (this.props.$list && this.props.$list.toJS()) || []
       return (
         <View style={{ flex: 1 }}>
           <CommonHeader

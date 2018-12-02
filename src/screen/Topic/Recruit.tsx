@@ -1,6 +1,6 @@
 import TopicContainerHOC from './TopicContainerHoc'
 
 export default TopicContainerHOC({
-  tab: 'recruit',
+  tab: 'job',
   title: '招聘'
 })
