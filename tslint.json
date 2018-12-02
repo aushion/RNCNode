@@ -6,9 +6,13 @@
     "no-object-literal-type-assertion": false, // 允许对对象字面量使用类型断言
     "comment-format": false, // 评论 不要格式
     "no-any": false,
-    "no-angle-bracket-type-assertion":false,
-    "no-implicit-dependencies":false,
-    "no-empty-interface":false
+    "no-angle-bracket-type-assertion": false,
+    "no-implicit-dependencies": false,
+    "no-empty-interface": false,
+    "no-magic-numbers": false,
+    "newline-before-return": false,
+    "no-parameter-reassignment": false,
+    "no-string-literal": false
   },
   "linterOptions": {
     "exclude": [

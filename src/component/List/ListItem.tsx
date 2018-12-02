@@ -1,24 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Avatar } from 'react-native-elements'
+import { Topic } from '../../store/records'
 
-const TopicItem = {
-  id: '', // 主题ID
-  createdAt: '', // 创建时间
-  good: '', // 是否精华
-  top: '', // 是否置顶
-  title: '',
-  content: '',
-  authorId: '',
-  author: {
-    loginName: '',
-    avatar: ''
-  },
-  lastRepliedAt: '', // 最后一次回复时间
-  replyCount: '', // 回复总数
-  tab: '', // 所属tab
-  visitCount: '' // 访问人数
-}
+const TopicItem = new Topic()
 interface Props {
   item: typeof TopicItem
   onPressed: (content: string, title: string) => {}
@@ -40,7 +25,7 @@ export const ListItem: React.SFC<Props> = props => {
         rounded
         source={{
           uri:
-            (itemData.author && itemData.author.avatar_url) ||
+            (itemData.author && itemData.author.avatarUrl) ||
             'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'
         }}
         onPress={() => console.log('Works!')}
@@ -50,7 +35,7 @@ export const ListItem: React.SFC<Props> = props => {
         <Text style={{ fontSize: 14, fontWeight: 'bold' }}>
           {itemData.title}
         </Text>
-        <Text style={{ fontSize: 10 }}>{itemData.author.loginname}</Text>
+        <Text style={{ fontSize: 10 }}>{itemData.author.loginName}</Text>
       </View>
     </TouchableOpacity>
   )

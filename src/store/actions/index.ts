@@ -1,1 +1,1 @@
-export * from './createTopic'
+export * from './topic'

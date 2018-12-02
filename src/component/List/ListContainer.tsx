@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlatList, View, Text, Dimensions } from 'react-native'
 import { ListItem } from './ListItem'
-const { width, height } = Dimensions.get('window')
+const { height } = Dimensions.get('window')
 interface Props {
   source: object[]
   refreshing: boolean
@@ -64,7 +64,7 @@ export class ListContainer extends React.Component<Props, {}> {
           onRefresh={() => {
             this.props.onRefresh()
           }}
-          onEndReachedThreshold={0.5}
+          onEndReachedThreshold={0.1}
           onEndReached={this.props.onEndReached}
         />
       </View>

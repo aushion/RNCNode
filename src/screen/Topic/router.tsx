@@ -6,19 +6,19 @@ const IoniconsFontSize: number = 25
 export default createBottomTabNavigator(
   {
     '/main': {
-      screen: require('./Main/router').default
+      screen: require('./Main').default
     },
     '/elite': {
-      screen: require('./Elite/router').default
+      screen: require('./Elite').default
     },
     '/share': {
-      screen: require('./Share/router').default
+      screen: require('./Share').default
     },
     '/recruit': {
-      screen: require('./Recruit/router').default
+      screen: require('./Recruit').default
     },
     '/question': {
-      screen: require('./Question/router').default
+      screen: require('./Question').default
     }
   },
   {

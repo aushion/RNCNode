@@ -1,4 +1,5 @@
-import thunkMiddleware from 'redux-thunk'
+import promiseMiddleware from 'redux-promise'
+
 import { createStore, compose, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
@@ -16,7 +17,7 @@ export default function configureStore() {
     return store
   }
 
-  const middlewares = [thunkMiddleware]
+  const middlewares = [promiseMiddleware]
 
   store = createStore(
     rootReducer,

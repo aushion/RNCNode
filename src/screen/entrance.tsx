@@ -28,7 +28,7 @@ class Launch extends React.Component<NavigationProps> {
 const Home = createStackNavigator(
   {
     '/home': {
-      screen: require('./Home/router').default
+      screen: require('./Topic/router').default
     },
     '/setting': {
       screen: require('./Setting').default
@@ -60,11 +60,9 @@ class AppContainer extends Component<NavigationProps> {
   private store = getStore()
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <Provider store={this.store}>
-          <AppNavigator navigation={this.props.navigation} />
-        </Provider>
-      </View>
+      <Provider store={this.store}>
+        <AppNavigator navigation={this.props.navigation} />
+      </Provider>
     )
   }
 }

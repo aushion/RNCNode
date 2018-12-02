@@ -1,7 +1,7 @@
 import { Record } from 'immutable'
 
 export const Topic = Record({
-  id: '', // 主题ID
+  id: 0, // 主题ID
   createdAt: '', // 创建时间
   good: '', // 是否精华
   top: '', // 是否置顶
@@ -10,7 +10,7 @@ export const Topic = Record({
   authorId: '',
   author: {
     loginName: '',
-    avatar: ''
+    avatarUrl: ''
   },
   lastRepliedAt: '', // 最后一次回复时间
   replyCount: '', // 回复总数
