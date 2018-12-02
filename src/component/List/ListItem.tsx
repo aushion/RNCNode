@@ -21,7 +21,7 @@ const TopicItem = {
 }
 interface Props {
   item: typeof TopicItem
-  onPressed: (content: string) => {}
+  onPressed: (content: string, title: string) => {}
 }
 
 export const ListItem: React.SFC<Props> = props => {
@@ -31,8 +31,9 @@ export const ListItem: React.SFC<Props> = props => {
     <TouchableOpacity
       style={styles.commonLine}
       onPress={() => {
-        props.onPressed(itemData.content)
+        props.onPressed(itemData.content, itemData.title)
       }}
+      activeOpacity={0.8}
     >
       <Avatar
         small

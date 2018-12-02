@@ -3,56 +3,64 @@ import React from 'react'
 import { ListContainer } from '../../../component/List/ListContainer'
 import { getTopicByTabName } from '../../../service'
 import { View } from 'react-native'
-import { Header } from 'react-native-elements'
-
+import { CommonHeader } from '../../../component/Navigation/Header'
+import { CustomAvatar } from '../../../component/Navigation/Button'
 class EliteScreen extends React.Component<NavigationProps> {
-  static navigationOptions = {
-    title: '精华',
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold'
-    }
-  }
-
   state = {
     data: [],
+    currentPage: 1,
     refreshing: true
   }
 
-  onRefresh = async () => {
-    const result = await getTopicByTabName('good')
+  loadData = async (page: number = 1, clear?: boolean) => {
+    const result = await getTopicByTabName('good', { page })
     if (result) {
       this.setState({
-        data: result.data,
+        data: clear ? result.data : this.state.data.concat(result.data),
+        currentPage: page,
         refreshing: false
       })
     } else {
       this.setState({
-        refreshing: false
+        refreshing: false,
+        currentPage: page === 1 ? 1 : page - 1
       })
     }
   }
 
-  onEndReached = () => {
-    return this.onRefresh()
+  onRefresh = () => {
+    this.loadData(1, true)
   }
 
-  onItemPressed = content => {
-    return this.props.navigation.navigate('/detail', { content })
+  onEndReached = () => {
+    return this.loadData(this.state.currentPage + 1)
+  }
+
+  onItemPressed = (content, title) => {
+    return this.props.navigation.navigate('/detail', { content, title })
   }
 
   componentDidMount = () => {
-    this.onRefresh()
+    this.loadData()
   }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Header
-          leftComponent={{ icon: 'menu', color: '#fff' }}
-          centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-          rightComponent={{ icon: 'home', color: '#fff' }}
+        <CommonHeader
+          title={'CNode 社区'}
+          navigation={this.props.navigation}
+          leftComponent={
+            <CustomAvatar
+              onPress={() => {
+                this.props.navigation.navigate('/setting', {
+                  transition: 'vertical'
+                })
+              }}
+            />
+          }
         />
+
         <ListContainer
           source={this.state.data}
           refreshing={this.state.refreshing}

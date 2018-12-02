@@ -6,6 +6,7 @@ import Preference from 'react-native-default-preference'
 import { Provider } from 'react-redux'
 import getStore from '../store/getStore'
 import { View } from 'react-native'
+import CardStackTransitionConfigure from '../utils/CardStackTransitionConfigure.js'
 
 class Launch extends React.Component<NavigationProps> {
   constructor(props: any) {
@@ -38,7 +39,8 @@ const Home = createStackNavigator(
   },
   {
     initialRouteName: '/home',
-    headerMode: 'none'
+    headerMode: 'none',
+    transitionConfig: CardStackTransitionConfigure
   }
 )
 

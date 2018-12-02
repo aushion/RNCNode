@@ -3,32 +3,12 @@ import { View, WebView, Alert } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons' // npm i 后需要 react-naitve link react-native-vector-icons一下
 import Preference from 'react-native-default-preference'
 import getTotalHtml from '../../utils/getTotalHtml.js'
-import { Header } from 'react-native-elements'
-
+import { CommonHeader } from '../../component/Navigation/Header'
 // 页面级组件会被 react-navigation 注入 navigation,screenProps,navigationOptions 三个属性
 // 同一页面的 navigation.state.params 是同步一致的，可以用来和页面内其他组件通讯
 const IoniconsFontSize: number = 25
 
 class Home extends React.Component<NavigationProps> {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: navigation.getParam('otherParam', '基本组件'),
-      headerRight: (
-        <Ionicons
-          name={'ios-power'}
-          style={{ marginRight: 10 }}
-          color={'white'}
-          size={IoniconsFontSize}
-          onPress={() => Home._onPress(navigation)}
-        />
-      ),
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold'
-      }
-    }
-  }
-
   static _onPress = navigation => {
     Alert.alert(
       '确定退出？',
@@ -61,14 +41,11 @@ class Home extends React.Component<NavigationProps> {
 
   render() {
     const html = this.props.navigation.getParam('content') || ''
+    const title = this.props.navigation.getParam('title') || 'CNode爱好者'
     const htmlWithWrapper = getTotalHtml(html)
     return (
       <View style={styles.body}>
-        <Header
-          leftComponent={{ icon: 'menu', color: '#fff' }}
-          centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-          rightComponent={{ icon: 'home', color: '#fff' }}
-        />
+        <CommonHeader title={title} navigation={this.props.navigation} />
         <WebView
           source={{ html: htmlWithWrapper }}
           onError={this._renderError}
