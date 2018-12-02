@@ -22,7 +22,8 @@ class Setting extends React.Component {
   static navigationOptions = {
     mode: 'modal'
   }
-  static _onPress = navigation => {
+
+  _onPress = () => {
     Alert.alert(
       '确定退出？',
       '',
@@ -36,7 +37,7 @@ class Setting extends React.Component {
           text: 'Confirm',
           onPress: async () => {
             await Preference.clearMultiple(['account', 'password'])
-            navigation.navigate('Launch')
+            this.props.navigation.navigate('Launch')
           }
         }
       ],
@@ -44,8 +45,8 @@ class Setting extends React.Component {
     )
   }
 
-  _navigate(path) {
-    this.props.navigation.navigate(path)
+  _logout() {
+    this._onPress()
   }
 
   renderRow({ item }) {
@@ -79,7 +80,7 @@ class Setting extends React.Component {
           />
         </List>
         <Button
-          onPress={() => this._navigate('Login')}
+          onPress={() => this._logout()}
           raised
           title="退出登录"
           style={{ marginTop: 20 }}

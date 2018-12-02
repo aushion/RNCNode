@@ -6,6 +6,13 @@ import { View } from 'react-native'
 import { CommonHeader } from '../../../component/Navigation/Header'
 import { CustomAvatar } from '../../../component/Navigation/Button'
 class EliteScreen extends React.Component<NavigationProps> {
+  static navigationOptions = {
+    title: '精华',
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }
   state = {
     data: [],
     currentPage: 1,
