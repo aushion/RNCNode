@@ -8,20 +8,6 @@ import { CustomAvatar } from '../../component/Navigation/Button'
 import { is } from 'immutable'
 
 export default function({ tab = 'all', title = '精华' }) {
-  const mapStateToProps = (state, ownProps) => {
-    return {
-      $list: state.topic.get(tab)
-    }
-  }
-
-  const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-      getTopicByTabNameAction: ({ page }) =>
-        dispatch(getTopicByTabNameAction({ page, tab })),
-      clearTopicAction: () => dispatch(clearTopicAction())
-    }
-  }
-
   class HOC extends Component {
     static navigationOptions = {
       title,
@@ -136,6 +122,20 @@ export default function({ tab = 'all', title = '精华' }) {
           />
         </View>
       )
+    }
+  }
+
+  const mapStateToProps = (state, ownProps) => {
+    return {
+      $list: state.getIn(['topic', tab])
+    }
+  }
+
+  const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+      getTopicByTabNameAction: ({ page }) =>
+        dispatch(getTopicByTabNameAction({ page, tab })),
+      clearTopicAction: () => dispatch(clearTopicAction())
     }
   }
 
