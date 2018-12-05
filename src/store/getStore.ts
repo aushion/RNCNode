@@ -1,5 +1,5 @@
 import promiseMiddleware from 'redux-promise'
-
+import Immutable from 'immutable'
 import { createStore, compose, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
@@ -21,7 +21,7 @@ export default function configureStore() {
 
   store = createStore(
     rootReducer,
-    {},
+    Immutable.Map({}),
     compose(
       __DEV__
         ? composeWithDevTools({})(applyMiddleware(...middlewares))
