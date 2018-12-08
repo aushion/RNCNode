@@ -13,20 +13,17 @@ const defaultMap = Immutable.Map({
 
 export const topic = handleActions(
   {
-    [getTopicByTabNameAction](state, { payload }) {
-      const { tab = 'all', data } = payload
-      let topicStore = state.get(tab)
-      console.log('store', topicStore.toJS())
-      data &&
-        data.forEach(topic => {
-          const jsFormTopic = getJsFormTopic(topic)
-          const topicRecord = new Topic(jsFormTopic)
-          topicStore = topicStore.push(topicRecord)
-        })
-      return state.set(tab, topicStore)
+    [getTopicByTabNameAction](state, { payload: { tab = 'all', data = [] } }) {
+      return state.set(
+        tab,
+        data
+          .map(getJsFormTopic)
+          .map(item => new Topic(item))
+          .reduce(($topicList, next) => $topicList.push(next), state.get(tab))
+      )
     },
-    [clearTopicAction]() {
-      return Immutable.List()
+    [clearTopicAction](state, { payload: { tab } }) {
+      return state.set(tab, Immutable.List())
     }
   },
   defaultMap

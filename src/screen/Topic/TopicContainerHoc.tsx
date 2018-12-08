@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { getTopicByTabNameAction, clearTopicAction } from '../../store/actions'
 import { ListContainer } from '../../component/List/ListContainer'
 import { View } from 'react-native'
 import { CommonHeader } from '../../component/Navigation/Header'
 import { CustomAvatar } from '../../component/Navigation/Button'
-import { is } from 'immutable'
+import Immutable from 'immutable';
 
 export default function({ tab = 'all', title = '精华' }) {
-  class HOC extends Component {
+  class HOC extends PureComponent {
     static navigationOptions = {
       title,
       headerTintColor: '#fff',
@@ -46,7 +46,7 @@ export default function({ tab = 'all', title = '精华' }) {
     }
 
     onRefresh = () => {
-      this.props.clearTopicAction()
+      this.props.clearTopicAction({tab})
       this.loadData(1, true)
     }
 
@@ -62,41 +62,15 @@ export default function({ tab = 'all', title = '精华' }) {
       this.loadData(1, true)
     }
 
-    shouldComponentUpdate = (nextProps = {}, nextState = {}) => {
-      const thisProps = this.props || {},
-        thisState = this.state || {}
+    $tempList = Immutable.List();
 
-      if (nextProps.$list && !nextProps.$list.size) {
-        return false
+    componentWillReceiveProps(nextProps: Props): void {
+      if (nextProps.$list.size===0 && this.props.$list.size!==0) {
+        this.$tempList = this.props.$list
       }
-
-      if (
-        Object.keys(thisProps).length !== Object.keys(nextProps).length ||
-        Object.keys(thisState).length !== Object.keys(nextState).length
-      ) {
-        return true
-      }
-
-      for (const key in nextProps) {
-        if (!is(thisProps[key], nextProps[key])) {
-          return true
-        }
-      }
-
-      for (const key in nextState) {
-        if (
-          thisState[key] !== nextState[key] &&
-          !is(thisState[key], nextState[key])
-        ) {
-          return true
-        }
-      }
-
-      return false
     }
 
     render() {
-      const source = (this.props.$list && this.props.$list.toJS()) || []
       return (
         <View style={{ flex: 1 }}>
           <CommonHeader
@@ -114,7 +88,7 @@ export default function({ tab = 'all', title = '精华' }) {
           />
 
           <ListContainer
-            source={source}
+            source={this.props.$list.size===0?this.$tempList:this.props.$list}
             refreshing={this.state.refreshing}
             onRefresh={this.onRefresh}
             onEndReached={this.onEndReached}
@@ -125,17 +99,17 @@ export default function({ tab = 'all', title = '精华' }) {
     }
   }
 
-  const mapStateToProps = (state, ownProps) => {
+  const mapStateToProps = (state) => {
     return {
       $list: state.getIn(['topic', tab])
     }
   }
 
-  const mapDispatchToProps = (dispatch, ownProps) => {
+  const mapDispatchToProps = (dispatch) => {
     return {
       getTopicByTabNameAction: ({ page }) =>
         dispatch(getTopicByTabNameAction({ page, tab })),
-      clearTopicAction: () => dispatch(clearTopicAction())
+      clearTopicAction: ({tab}) => dispatch(clearTopicAction({tab}))
     }
   }
 

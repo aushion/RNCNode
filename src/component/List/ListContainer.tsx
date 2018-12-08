@@ -53,7 +53,7 @@ export class ListContainer extends React.Component<Props, {}> {
         <FlatList
           extraData={this.state}
           keyExtractor={this._keyExtractor}
-          data={this.props.source}
+          data={this.props.source.toJS()}
           renderItem={({ item }) => (
             <ListItem item={item} onPressed={this.props.onItemPressed} />
           )}

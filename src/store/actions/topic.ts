@@ -1,12 +1,18 @@
 import { createAction } from 'redux-actions'
 import { getTopicByTabName } from '../../service'
+import * as Type from '../../constant/actionType'
 
 /**
- * 创建文件时，用户身份的限制信息
+ * 获取主题内容
  */
 export const getTopicByTabNameAction = createAction(
-  'getTopicByTabNameAction',
+  Type.GET_TOPICS_BY_TAB,
   args => getTopicByTabName(args)
 )
-
-export const clearTopicAction = createAction('clearTopicAction')
+/**
+ * 刷新时清除主题内容
+ */
+export const clearTopicAction = createAction(
+  Type.CLEAR_TOPICS_BY_TAB,
+  args => args
+)
