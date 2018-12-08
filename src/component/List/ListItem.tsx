@@ -23,7 +23,6 @@ export class ListItem extends Component {
   render() {
     const props = this.props
     const itemData = props.item
-    console.log('rerender', props.item)
 
     return (
       <TouchableOpacity
