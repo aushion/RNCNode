@@ -5,7 +5,7 @@ import { ListContainer } from '../../component/List/ListContainer'
 import { View } from 'react-native'
 import { CommonHeader } from '../../component/Navigation/Header'
 import { CustomAvatar } from '../../component/Navigation/Button'
-import Immutable from 'immutable';
+import Immutable from 'immutable'
 
 export default function({ tab = 'all', title = '精华' }) {
   class HOC extends PureComponent {
@@ -46,7 +46,7 @@ export default function({ tab = 'all', title = '精华' }) {
     }
 
     onRefresh = () => {
-      this.props.clearTopicAction({tab})
+      this.props.clearTopicAction({ tab })
       this.loadData(1, true)
     }
 
@@ -62,10 +62,10 @@ export default function({ tab = 'all', title = '精华' }) {
       this.loadData(1, true)
     }
 
-    $tempList = Immutable.List();
+    $tempList = Immutable.List()
 
     componentWillReceiveProps(nextProps: Props): void {
-      if (nextProps.$list.size===0 && this.props.$list.size!==0) {
+      if (nextProps.$list.size === 0 && this.props.$list.size !== 0) {
         this.$tempList = this.props.$list
       }
     }
@@ -88,7 +88,9 @@ export default function({ tab = 'all', title = '精华' }) {
           />
 
           <ListContainer
-            source={this.props.$list.size===0?this.$tempList:this.props.$list}
+            source={
+              this.props.$list.size === 0 ? this.$tempList : this.props.$list
+            }
             refreshing={this.state.refreshing}
             onRefresh={this.onRefresh}
             onEndReached={this.onEndReached}
@@ -99,17 +101,17 @@ export default function({ tab = 'all', title = '精华' }) {
     }
   }
 
-  const mapStateToProps = (state) => {
+  const mapStateToProps = state => {
     return {
       $list: state.getIn(['topic', tab])
     }
   }
 
-  const mapDispatchToProps = (dispatch) => {
+  const mapDispatchToProps = dispatch => {
     return {
       getTopicByTabNameAction: ({ page }) =>
         dispatch(getTopicByTabNameAction({ page, tab })),
-      clearTopicAction: ({tab}) => dispatch(clearTopicAction({tab}))
+      clearTopicAction: ({ tab }) => dispatch(clearTopicAction({ tab }))
     }
   }
 
