@@ -5,52 +5,66 @@ import {
 
 export default () => ({
   transitionSpec: {
-    duration: 500,
+    duration: 750,
     easing: Easing.out(Easing.poly(4)),
-    timing: Animated.timing
+    timing: Animated.timing,
+    useNativeDriver: true
   },
   screenInterpolator: sceneProps => {
     const {
-      layout,
       position,
-      scene
-    } = sceneProps
-    const {
+      layout,
+      scene,
       index,
-      route: {
-        params
-      }
-    } = scene
+      scenes
+    } = sceneProps
 
-    const {
-      initHeight: height,
-      initWidth: width
-    } = layout
+    const thisSceneIndex = scene.index
+    const height = layout.initHeight
+    const width = layout.initWidth
 
-    const translateY = position.interpolate({
-      inputRange: [index - 1, index, index + 1],
-      outputRange: [height, 0, 0]
-    })
+    // We can access our navigation params on the scene's 'route' property
+    var thisSceneParams = scene.route.params || {}
 
     const translateX = position.interpolate({
-      inputRange: [index - 1, index, index + 1],
+      inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
       outputRange: [width, 0, 0]
     })
 
-    const opacity = position.interpolate({
-      inputRange: [index - 1, index - 0.99, index],
-      outputRange: [0, 1, 1]
+    const translateY = position.interpolate({
+      inputRange: [thisSceneIndex - 0.9, thisSceneIndex, thisSceneIndex + 0.9],
+      outputRange: [height, 0, 0]
     })
 
-    const vertical = params && params.transition === 'vertical'
+    const opacity = position.interpolate({
+      inputRange: [thisSceneIndex - 1, thisSceneIndex - 0.5, thisSceneIndex],
+      outputRange: [0, 1, 1],
+    })
 
-    return {
+    const scale = position.interpolate({
+      inputRange: [thisSceneIndex - 0.9, thisSceneIndex, thisSceneIndex + 0.9],
+      outputRange: [.7, 1, .7]
+    })
+
+    const slideFromRight = {
       opacity,
-      transform: [vertical ? {
-        translateY
-      } : {
+      transform: [{
         translateX
       }]
     }
+
+    const slideInFromBottom = {
+      opacity,
+      transform: [{
+        translateY
+      }, {
+        scaleY: scale
+      }]
+    }
+
+    if (thisSceneParams.transition === 'vertical')
+      return slideInFromBottom
+    else
+      return slideFromRight
   }
 })

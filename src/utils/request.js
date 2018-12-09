@@ -4,6 +4,9 @@
 
 import Config from './config';
 import queryString from 'query-string';
+import {
+  Alert
+} from 'react-native';
 
 function request(method, url, options = {}) {
   const {
@@ -52,7 +55,9 @@ function request(method, url, options = {}) {
     ]);
   }
   return promise.catch(e => {
-    console.log('e', e)
+    Alert.alert('网络不太好，请稍后重试！', '', [{
+      text: '知道了'
+    }])
   });
 }
 
