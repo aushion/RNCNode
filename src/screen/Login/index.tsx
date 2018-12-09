@@ -27,7 +27,7 @@ class List extends Component<NavigationProps, State> {
     accountError: '',
     password: '',
     passwordError: '',
-    behavior: Behavior.Position
+    behavior: Behavior.Padding
   }
 
   _onChangeTextAccount = (account: string) => {

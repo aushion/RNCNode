@@ -1,9 +1,12 @@
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation'
-import React from 'react'
+import React, { Component } from 'react'
 import SplashScreen from 'react-native-splash-screen'
-import Ionicons from 'react-native-vector-icons/Ionicons' // npm i 后需要 react-naitve link react-native-vector-icons一下
 import Login from './Login'
 import Preference from 'react-native-default-preference'
+import { Provider } from 'react-redux'
+import getStore from '../store/getStore'
+import { View } from 'react-native'
+import CardStackTransitionConfigure from '../utils/CardStackTransitionConfigure.js'
 
 class Launch extends React.Component<NavigationProps> {
   constructor(props: any) {
@@ -25,34 +28,23 @@ class Launch extends React.Component<NavigationProps> {
 const Home = createStackNavigator(
   {
     '/home': {
-      screen: require('./Home/router').default,
-      path: '/home',
-      navigationOptions: {
-        title: 'CNode 社区',
-        headerRight: null,
-        headerStyle:{
-          backgroundColor:'green',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold'
-        }
-      },
+      screen: require('./Topic/router').default
     },
-    '/setting':{
+    '/setting': {
       screen: require('./Setting').default
     },
-    '/detail':{
+    '/detail': {
       screen: require('./Detail').default
     }
   },
   {
     initialRouteName: '/home',
-    headerMode: 'screen',
+    headerMode: 'none',
+    transitionConfig: CardStackTransitionConfigure
   }
 )
 
-export default createSwitchNavigator(
+const AppNavigator = createSwitchNavigator(
   {
     Launch,
     Home,
@@ -62,3 +54,17 @@ export default createSwitchNavigator(
     initialRouteName: 'Launch'
   }
 )
+
+class AppContainer extends Component<NavigationProps> {
+  static router = AppNavigator.router
+  private store = getStore()
+  render() {
+    return (
+      <Provider store={this.store}>
+        <AppNavigator navigation={this.props.navigation} />
+      </Provider>
+    )
+  }
+}
+
+export default AppContainer
